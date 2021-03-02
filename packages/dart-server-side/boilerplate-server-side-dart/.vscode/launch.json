@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "boilerplate_server_side_dart",
+            "type": "dart",
+            "request": "launch",
+            "program": "bin/server.dart"
+        }
+
+    ]
+}
