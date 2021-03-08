@@ -59,8 +59,8 @@ class AuthApi {
 
       Map body = data as Map<String, dynamic>;
       // Response 400 Bad request
-      if (!body.containsKey('email') && !body.containsKey('password'))
-        return Response(HttpStatus.badRequest);
+      if (!body.containsKey('email') && !body.containsKey('password')
+        ) return Response(HttpStatus.badRequest);
 
       final email = body['email'] as String;
       final password = (body['password'] as String);
@@ -94,6 +94,14 @@ class AuthApi {
       return Response.ok(json.encode({'token': token}), headers: {
         HttpHeaders.contentTypeHeader : ContentType.json.mimeType
       }); // Response 200
+    });
+
+    router.post('/logout', (Request request) async {
+      if(request.context['account'] == null){
+        return Response.forbidden('No authorizatin'); 
+      }
+      // logout successfully
+      return Response.ok('logout successfully'); // Response 200
     });
 
     return router;

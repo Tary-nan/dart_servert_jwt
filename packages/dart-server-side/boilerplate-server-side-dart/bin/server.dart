@@ -25,7 +25,7 @@ void main(List<String> args) async {
   final store = databasse.collection('users');
   final secret = Env.mongoUrl;
   app.mount('/auth/', AuthApi(secret: secret, store: store).router);
-  app.mount('/users/', UserApi().router);
+  app.mount('/users/', UserApi(store: store).router);
 
   // / Permet au parametre d'etre optionnel
   // / /<name|.*>'

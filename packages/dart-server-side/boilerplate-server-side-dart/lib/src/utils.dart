@@ -25,7 +25,7 @@ String generateJwt({String subject, String issuer, String secret}) {
     // Create a json web token
     final jwt = JWT({
       'iat': 123,
-    }, issuer: issuer, subject: subject);
+    }, issuer: issuer, subject: subject) ;
 
     // Sign it
     token = jwt.sign(SecretKey(secret));
