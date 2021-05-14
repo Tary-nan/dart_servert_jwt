@@ -1,4 +1,4 @@
 class RemoveTodoAction {
-  final id;
+  final String id;
   RemoveTodoAction(this.id);
 }

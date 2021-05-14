@@ -22,8 +22,11 @@ List<Todo> updateTodoReducer(List<Todo> state, UpdateTodoAction action) {
   return [...state];
 }
 
-List<Todo> addTodoReducer(List<Todo> state, AddTodoAction action) =>
-    [...state, Todo(id: action.id, text: action.text, completed: false)];
+List<Todo> addTodoReducer(List<Todo> state, AddTodoAction action) {
+  print(action.id);
+  return [...state, Todo(id: action.id, text: action.text, completed: false)];
+}
+    
 
 List<Todo> toggleTodoReducer(List<Todo> state, ToggleTodoAction action) => state
     .map((todo) => (todo.id.toString().contains(action.id.toString())

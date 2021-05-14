@@ -24,7 +24,9 @@ class UserApi {
     });
 
     var handler =
-        const Pipeline().addMiddleware(checkAuthorization()).addHandler(router);
+        const Pipeline()
+        .addMiddleware(checkAuthorization())
+        .addHandler(router);
     return handler;
   }
 }

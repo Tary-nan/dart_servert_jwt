@@ -6,10 +6,10 @@
     "configurations": [
         {
             "name": "dart-tour",
-            "cwd": "packages\\dart-tour",
+            "cwd": "packages\\statemanagment",
             "request": "launch",
             "type": "dart",
-            "program": "bin/server.dart"
+            "program": "bin/redux_demo.dart"
 
         }
     ]

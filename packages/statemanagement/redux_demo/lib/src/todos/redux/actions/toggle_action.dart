@@ -1,4 +1,4 @@
 class ToggleTodoAction{
-  final int id;
+  final String id;
   ToggleTodoAction({this.id});
 }

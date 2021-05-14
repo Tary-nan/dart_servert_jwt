@@ -1,5 +1,5 @@
 class AddTodoAction {
-  final id;
-  final text;
+  final String id;
+  final String text;
   AddTodoAction(this.id, this.text);
 }

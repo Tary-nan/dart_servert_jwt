@@ -21,8 +21,7 @@ class AuthApi {
 
       Map body = data as Map<String, dynamic>;
       // Response 400 Bad request
-      if (!body.containsKey('email') && !body.containsKey('password'))
-        return Response(HttpStatus.badRequest);
+      if (!body.containsKey('email') && !body.containsKey('password')) return Response(HttpStatus.badRequest);
 
       final email = body['email'] as String;
       final password = (body['password'] as String);
@@ -38,8 +37,7 @@ class AuthApi {
       // user already existing ??
 
       final user = await store.findOne(where.eq('email', email));
-      if (user != null)
-        return Response(HttpStatus.conflict); // Response 409 conflict
+      if (user != null) return Response(HttpStatus.conflict); // Response 409 conflict
 
       // create user
       final salt = generateSalt();

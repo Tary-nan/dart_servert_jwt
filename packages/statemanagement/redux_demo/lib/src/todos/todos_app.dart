@@ -15,15 +15,15 @@ class TodosApp implements Manager {
 
   StreamSubscription<TodoState> streamSubscription;
 
-  void add(int id, String text) {
+  void add(String id, String text) {
     _store.dispatch(AddTodoAction(id, text));
   }
 
-  void remove(int id) {
+  void remove(String id) {
     _store.dispatch(RemoveTodoAction(id));
   }
 
-  void toggle(int id) {
+  void toggle(String id) {
     _store.dispatch(ToggleTodoAction(id: id));
   }
 
@@ -31,27 +31,21 @@ class TodosApp implements Manager {
     _store.dispatch(SetVisibilityFilterAction(filter: filter));
   }
 
-  void update(int id, Todo todo) {
+  void update(String id, Todo todo) {
     _store.dispatch(UpdateTodoAction(id, todo));
   }
 
   void storeState(TodoState curentState) {
     print('curent state');
-    print(curentState.visibilityFilter);
     curentState.todos
         .forEach((element) => print('ok ${element.id} :  ${element.text}'));
   }
 
   void listen() {
-    print('/////');
-    print(_store.state.todos);
-    print('/////');
     streamSubscription = _store.onChange.listen(
       (value) {
-        print(value.isFetching);
         print(value.todos);
       },
-      onDone: () => print('end'),
     );
   }
 

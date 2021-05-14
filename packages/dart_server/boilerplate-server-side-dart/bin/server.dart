@@ -1,5 +1,6 @@
 import 'package:boilerplate_server_side_dart/src/auth/middleware/check_autorization.dart';
 import 'package:boilerplate_server_side_dart/src/auth/middleware/cors.dart';
+import 'package:boilerplate_server_side_dart/src/realtime/realtime.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
@@ -13,7 +14,7 @@ import '../config/config.dart';
 import '../lib/src/user_api/user_api.dart';
 
 const _hostname = 'localhost';
-var port = 8080;
+var port = 8090;
 
 void main(List<String> args) async {
   var databasse = Db(Env.mongoUrl);
@@ -23,9 +24,17 @@ void main(List<String> args) async {
 
   var app = Router();
   final store = databasse.collection('users');
-  final secret = Env.mongoUrl;
+  final secret = Env.mongoUrl; 
+
+  // Authenticate user
   app.mount('/auth/', AuthApi(secret: secret, store: store).router);
+
+  //Api for User
   app.mount('/users/', UserApi(store: store).router);
+
+  // Realtime
+  app.mount('/realtime/', Realtime(store: store).router);
+
 
   // / Permet au parametre d'etre optionnel
   // / /<name|.*>'

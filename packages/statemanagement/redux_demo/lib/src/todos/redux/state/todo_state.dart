@@ -1,3 +1,5 @@
+import 'package:redux_demo/src/databasse/database.dart';
+
 enum VisibilityFilter { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED }
 
 class TodoState {
@@ -5,12 +7,14 @@ class TodoState {
    VisibilityFilter visibilityFilter;
    bool isFetching;
    Exception error;
+   DB database;
 
    TodoState({
     this.todos = const [],
     this.visibilityFilter,
     this.error,
-    this.isFetching = false
+    this.isFetching = false,
+    this.database
   });
 
   TodoState.initialState() : todos = <Todo>[],
@@ -20,7 +24,7 @@ class TodoState {
 }
 
 class Todo {
-  final int id;
+  final String id;
   final String text;
   final bool completed;
 
@@ -29,6 +33,20 @@ class Todo {
     this.text,
     this.completed = false,
   });
+
+  factory Todo.fromJson(Map json){
+    return Todo(
+      id: DateTime.now().toString(),
+      text: json['text'],
+      completed : false
+    );
+  }
+
+  Map<String, dynamic> toJson()=>{
+      'id': id,
+      'text': text,
+      'completed': completed
+  };
 
   Todo copyWith({int id, String text, bool completed}) {
     return Todo(
